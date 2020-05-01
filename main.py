@@ -8,7 +8,8 @@ class TelephoneDB(list):
     искать, изменять и удалять из БД.
     """
 
-    db = []
+    def __init__(self):
+        self.db = []
 
     def __person_exist_check(self, person):
         for i in self.db:
