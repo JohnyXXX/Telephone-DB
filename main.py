@@ -1,4 +1,5 @@
 class TelephoneExist(Exception):
+    """Класс исключения если тнлефон уже имеется в БД"""
     pass
 
 
@@ -54,6 +55,7 @@ class Person:
 
 
 if __name__ == '__main__':
+    db = TelephoneDB()
     a_person = Person('Иванов Иван Иванович', 'Ленина, 45, 23', '+70000000001')
     b_person = Person('Прекрасная Елена Павловна', 'Кутузова, 6, 123', '+70000000002')
     c_person = Person('Вольная Ольга Александровна', 'Парковая, 50, 82', '+70000000003')
@@ -64,7 +66,6 @@ if __name__ == '__main__':
     # print(b_person)
     # print(c_person)
     # print(d_person)
-    db = TelephoneDB()
     db.append(a_person)
     db.append(b_person)
     db.append(c_person)
