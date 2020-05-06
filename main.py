@@ -1,3 +1,6 @@
+from sys import stderr
+
+
 class TelephoneExist(Exception):
     """Класс исключения если тнлефон уже имеется в БД"""
     pass
@@ -74,7 +77,7 @@ if __name__ == '__main__':
             db.append(add_person)
             print('Add success: ', add_person)
         except Exception as e:
-            print(type(e), add_person)
+            print(type(e), add_person, file=stderr)
 
     for exist_person in (
             Person('Прекрасная Елена Павловна', 'Кутузова, 6, 123', '+70000000002'),
@@ -84,7 +87,7 @@ if __name__ == '__main__':
             db.append(exist_person)
             print('Add exist: ', exist_person)
         except Exception as e:
-            print(e, 'Not add: ', exist_person)
+            print(e, 'Not add: ', exist_person, file=stderr)
 
     for find_person in (
             'Ольга',
@@ -97,7 +100,7 @@ if __name__ == '__main__':
             p = db.find(find_person)
             print(f'{find_person} find in: ', p)
         except Exception as e:
-            print(type(e), find_person)
+            print(type(e), find_person, file=stderr)
 
     for edit_person in (
             ('Невольная Мария Викторовна', 'Лесная, 12, 5', '+70000000003'),
@@ -107,7 +110,7 @@ if __name__ == '__main__':
             db.edit(edit_person)
             print(len(db.db), db.db)
         except Exception as e:
-            print(type(e), edit_person)
+            print(type(e), edit_person, file=stderr)
 
     for remove_person in (
             '+70000000001',
@@ -117,4 +120,4 @@ if __name__ == '__main__':
             db.remove(remove_person)
             print(len(db.db), db.db)
         except Exception as e:
-            print(type(e), remove_person)
+            print(type(e), remove_person, file=stderr)
