@@ -1,3 +1,4 @@
+from json import dump, load
 from sys import stderr
 
 
@@ -13,7 +14,10 @@ class TelephoneDB(dict):
     """
 
     def __init__(self):
-        self.db = {}
+        try:
+            self.db = load(open('db.json'))
+        except FileNotFoundError:
+            self.db = {}
 
     def __person_exist_check(self, person):
         for i in self.db.keys():
@@ -38,7 +42,6 @@ class TelephoneDB(dict):
         return result
 
     def edit(self, data):
-        # print('data', type(data), data)
         for key in self.db.keys():
             if data.key in key:
                 self.db.update({data.key: data.value})
@@ -50,6 +53,9 @@ class TelephoneDB(dict):
                     request.lower() in value[1].lower()
             ):
                 return self.db.pop(key)
+
+    def save(self):
+        dump(self.db, open('db.json', 'w'), ensure_ascii=False)
 
 
 class Person(TelephoneDB):
@@ -121,3 +127,5 @@ if __name__ == '__main__':
             print(len(db.db), db.db)
         except Exception as e:
             print(type(e), remove_person, file=stderr)
+
+    db.save()
